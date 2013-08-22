@@ -1,12 +1,20 @@
 package com.skyworx.shop.model;
 
+import javax.persistence.*;
+
+@Entity
 public class OrderItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long productId;
     private String productName;
     private Integer quantity;
     private Double price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Order order;
 
     public Long getId() {
         return id;
@@ -50,5 +58,13 @@ public class OrderItem {
 
     public void addQuantity(Integer quantity) {
         setQuantity(getQuantity() + quantity);
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
