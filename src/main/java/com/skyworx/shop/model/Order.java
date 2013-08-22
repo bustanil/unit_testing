@@ -1,5 +1,7 @@
 package com.skyworx.shop.model;
 
+import com.google.common.base.Preconditions;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,8 +17,16 @@ public class Order {
     private Date date;
     private String customerName;
 
-    @OneToMany(mappedBy = "order", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<OrderItem>();
+
+    public Order() {
+    }
+
+    public Order(Date date, String customerName) {
+        this.date = date;
+        this.customerName = customerName;
+    }
 
     public Long getId() {
         return id;
@@ -48,5 +58,12 @@ public class Order {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public void addItem(OrderItem item) {
+        Preconditions.checkNotNull(item);
+
+        item.setOrder(this);
+        getItems().add(item);
     }
 }

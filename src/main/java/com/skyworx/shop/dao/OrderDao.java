@@ -18,4 +18,6 @@ public interface OrderDao {
 
     @SuppressWarnings("unchecked")
     List<Order> list();
+
+    Order findByCustomerName(String customerName);
 }

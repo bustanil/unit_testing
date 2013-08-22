@@ -16,6 +16,16 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
+    public OrderItem() {
+    }
+
+    public OrderItem(Long productId, String productName, Integer quantity, Double price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

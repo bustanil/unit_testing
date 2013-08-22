@@ -3,6 +3,7 @@ package com.skyworx.shop.dao;
 import com.skyworx.shop.model.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +33,14 @@ public class OrderDaoImpl implements OrderDao {
     @SuppressWarnings("unchecked")
     public List<Order> list() {
         return getSession().createCriteria(Order.class).list();
+    }
+
+    @Override
+    public Order findByCustomerName(String customerName) {
+        return (Order) getSession()
+                .createCriteria(Order.class)
+                .add(Restrictions.eq("customerName", customerName))
+        .uniqueResult();
     }
 
 }
