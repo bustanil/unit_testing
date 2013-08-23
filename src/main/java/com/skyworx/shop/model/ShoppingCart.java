@@ -23,10 +23,13 @@ public class ShoppingCart {
 
     @SuppressWarnings("unchecked")
     public List<OrderItem> getItems() {
-        return (List<OrderItem>) CollectionUtils.unmodifiableCollection(items);
+        return items;
     }
 
     public void addProduct(Product product, Integer quantity) {
+        if(product.getStock() < quantity) {
+            throw new IllegalArgumentException("Not enough stock");
+        }
         checkNotNull(product, "Product cannot be null");
         OrderItem item = searchItemByProductId(product.getId());
         if(item == null){
