@@ -24,11 +24,10 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void placeOrder(Order order) {
         checkNotNull(order);
-
         orderDao.save(order);
         for (OrderItem item : order.getItems()) {
             Product product = productDao.get(item.getProductId());
-            product.reduceQuantity(item.getQuantity());
+            product.reduceStock(item.getQuantity());
             productDao.save(product);
         }
     }

@@ -66,10 +66,6 @@ public class OrderItem {
         this.price = price;
     }
 
-    public void addQuantity(Integer quantity) {
-        setQuantity(getQuantity() + quantity);
-    }
-
     public Order getOrder() {
         return order;
     }

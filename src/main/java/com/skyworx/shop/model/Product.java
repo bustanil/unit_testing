@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
+public class Product implements Comparable<Product>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,10 +41,13 @@ public class Product {
         return stock;
     }
 
-    public void reduceQuantity(Integer quantity) {
-        if(stock < quantity) {
-            throw new IllegalArgumentException("Insufficient stock");
-        }
-        stock = stock - quantity;
-    }
+	public void reduceStock(Integer quantity) {
+		stock = stock - quantity;
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		return this.id.compareTo(o.id);
+	}
+
 }

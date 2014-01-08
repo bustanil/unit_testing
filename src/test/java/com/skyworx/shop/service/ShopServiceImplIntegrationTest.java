@@ -33,6 +33,6 @@ public class ShopServiceImplIntegrationTest extends BaseTransactionalTest {
 
         shopService.placeOrder(order);
 
-        Assert.assertEquals(1, orderDao.list().size());
+        Assert.assertEquals(9, productDao.get(bateraiAbc.getId()).getStock().intValue());
     }
 }

@@ -60,10 +60,9 @@ public class Order {
         this.customerName = customerName;
     }
 
-    public void addItem(OrderItem item) {
-        Preconditions.checkNotNull(item);
+	public void addItem(OrderItem orderItem) {
+		getItems().add(orderItem);
+		orderItem.setOrder(this);
+	}
 
-        item.setOrder(this);
-        getItems().add(item);
-    }
 }
